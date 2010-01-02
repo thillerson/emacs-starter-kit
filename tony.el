@@ -1,5 +1,15 @@
+;; Paths
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 ;; Colors
-(color-theme-zenburn)
+(add-to-list 'load-path "~/.emacs.d/tony/color-theme")
+(require 'color-theme)
+(eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-charcoal-black)))
+
 
 ;; Snippets
 (require 'yasnippet)

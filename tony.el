@@ -13,3 +13,6 @@
 ;; Keybindings
 (global-set-key (kbd "M-s") 'save-buffer)
 (global-set-key (kbd "M-z") 'undo)
+
+;; Start the server
+(server-start)

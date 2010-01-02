@@ -14,5 +14,8 @@
 (global-set-key (kbd "M-s") 'save-buffer)
 (global-set-key (kbd "M-z") 'undo)
 
+;; Hooks
+(add-hook 'ruby-mode-hook 'whitespace-mode)
+
 ;; Start the server
 (server-start)

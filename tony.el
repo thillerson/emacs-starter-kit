@@ -2,7 +2,7 @@
 (add-to-list 'default-frame-alist '(left . 0))
 (add-to-list 'default-frame-alist '(top . 0))
 (add-to-list 'default-frame-alist '(height . 55))
-(add-to-list 'default-frame-alist '(width . 190))
+(add-to-list 'default-frame-alist '(width . 200))
 
 ;; Paths
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
@@ -32,6 +32,16 @@
 
 ;; Hooks
 (add-hook 'ruby-mode-hook 'whitespace-mode)
+(add-hook 'nxml-mode-hook (lambda ()
+                            (flyspell-mode -1)))
+(add-hook 'nxhtml-mode-hook (lambda ()
+                            (flyspell-mode -1)))
+
+;;; rhtml-mode for rinari
+(add-to-list 'load-path "~/.emacs.d/tony/rhtml")
+(require 'rhtml-mode)
+(add-hook 'rhtml-mode-hook
+   	  (lambda () (rinari-launch)))
 
 ;; Start the server
 (server-start)

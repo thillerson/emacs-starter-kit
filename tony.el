@@ -29,6 +29,7 @@
 ;; Keybindings
 (global-set-key (kbd "M-s") 'save-buffer)
 (global-set-key (kbd "M-z") 'undo)
+(global-set-key (kbd "M-l") 'goto-line)
 
 ;; Hooks
 (add-hook 'ruby-mode-hook 'whitespace-mode)

@@ -14,8 +14,11 @@
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-charcoal-black)))
-
+     (color-theme-calm-forest)))
+(setq my-color-themes (list 'color-theme-charcoal-black 'color-theme-billw
+                            `color-theme-blue-mood `color-theme-calm-forest
+                            `color-theme-dark-blue `color-theme-dark-blue2
+                            `color-theme-deep-blue `color-theme-gray30))
 
 ;; Snippets
 (require 'yasnippet)

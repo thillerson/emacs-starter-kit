@@ -34,6 +34,18 @@
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 
+;; Scala
+(add-to-list 'load-path "~/.emacs.d/tony/scala-mode")
+(require 'scala-mode-auto)
+
+;; Scala yasnippets
+(setq yas/my-directory "~/.emacs.d/tony/scala-mode/contrib/yasnippet/snippets")
+(yas/load-directory yas/my-directory)
+(add-hook 'scala-mode-hook
+            '(lambda ()
+               (yas/minor-mode-on)
+               ))
+
 ;; Keybindings
 (global-set-key (kbd "M-s") 'save-buffer)
 (global-set-key (kbd "M-z") 'undo)

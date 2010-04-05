@@ -4,6 +4,9 @@
 (add-to-list 'default-frame-alist '(height . 55))
 (add-to-list 'default-frame-alist '(width . 200))
 
+;; Alpha
+(add-to-list 'default-frame-alist '(alpha 93 75))
+
 ;; Paths
 (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
 (setq exec-path (append exec-path '("/usr/local/bin")))
@@ -14,7 +17,7 @@
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-calm-forest)))
+     (color-theme-charcoal-black)))
 (setq my-color-themes (list 'color-theme-charcoal-black 'color-theme-billw
                             `color-theme-blue-mood `color-theme-calm-forest
                             `color-theme-dark-blue `color-theme-dark-blue2

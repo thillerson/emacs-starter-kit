@@ -73,8 +73,10 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
 (require 'textmate)
 (textmate-mode)
+;; PeepOpen.el
 (add-to-list 'load-path "~/.emacs.d/vendor/")
 (require 'peepopen)
+(global-set-key (kbd "C-x C-o") 'peepopen-goto-file-gui)
 
 ;; Start the server
 (server-start)

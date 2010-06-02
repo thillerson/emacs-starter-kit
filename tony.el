@@ -1,3 +1,7 @@
+;; Paths
+(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+(setq exec-path (append exec-path '("/usr/local/bin")))
+
 ;; Sizing
 (add-to-list 'default-frame-alist '(left . 0))
 (add-to-list 'default-frame-alist '(top . 0))
@@ -6,10 +10,6 @@
 
 ;; Alpha
 (add-to-list 'default-frame-alist '(alpha 93 75))
-
-;; Paths
-(setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-(setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;; Colors
 (add-to-list 'load-path "~/.emacs.d/tony/color-theme")
@@ -55,7 +55,7 @@
 (global-set-key (kbd "M-l") 'goto-line)
 
 ;; Hooks
-(add-hook 'ruby-mode-hook 'whitespace-mode)
+;;(add-hook 'ruby-mode-hook 'whitespace-mode)
 (add-hook 'nxml-mode-hook (lambda ()
                             (flyspell-mode -1)))
 (add-hook 'nxhtml-mode-hook (lambda ()
@@ -66,6 +66,15 @@
 (require 'rhtml-mode)
 (add-hook 'rhtml-mode-hook
    	  (lambda () (rinari-launch)))
+(add-hook 'rhtml-mode-hook
+          (lambda () (flyspell-mode -1)))
+
+;; Textmate.el
+(add-to-list 'load-path "~/.emacs.d/vendor/textmate.el")
+(require 'textmate)
+(textmate-mode)
+(add-to-list 'load-path "~/.emacs.d/vendor/")
+(require 'peepopen)
 
 ;; Start the server
 (server-start)

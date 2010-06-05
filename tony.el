@@ -77,6 +77,9 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/")
 (require 'peepopen)
 (global-set-key (kbd "C-x C-o") 'peepopen-goto-file-gui)
+;; For Emacs on Mac OS X http://emacsformacosx.com/
+;; Opens files in the existing frame instead of making new ones.
+(setq ns-pop-up-frames nil)
 
 ;; Start the server
 (server-start)

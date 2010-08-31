@@ -59,7 +59,11 @@
 (add-hook 'nxml-mode-hook (lambda ()
                             (flyspell-mode -1)))
 (add-hook 'nxhtml-mode-hook (lambda ()
-                            (flyspell-mode -1)))
+                              (flyspell-mode -1)))
+
+;; Viper (Viper is a package for emacs rebels)
+(setq viper-mode t)
+(require 'viper)
 
 ;;; rhtml-mode for rinari
 (add-to-list 'load-path "~/.emacs.d/tony/rhtml")

@@ -62,8 +62,10 @@
                               (flyspell-mode -1)))
 
 ;; Viper (Viper is a package for emacs rebels)
-(setq viper-mode t)
-(require 'viper)
+;;(setq viper-mode t)
+;;(require 'viper)
+;; Viper mode will be enabled by Vimpulse:
+(require 'vimpulse)
 
 ;;; rhtml-mode for rinari
 (add-to-list 'load-path "~/.emacs.d/tony/rhtml")

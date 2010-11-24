@@ -89,5 +89,9 @@
 ;; Opens files in the existing frame instead of making new ones.
 (setq ns-pop-up-frames nil)
 
+;; == Android Mode ==
+(add-to-list 'load-path "~/.emacs.d/tony/android-mode")
+(require 'android-mode)
+
 ;; == Start the server == 
 (server-start)

@@ -91,3 +91,8 @@
 
 ;; == Start the server == 
 (server-start)
+
+;; Never ever ever ever us this stupid terrible mode
+(eval-after-load 'paredit
+  '(disable-paredit-mode))
+  

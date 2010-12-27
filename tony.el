@@ -22,7 +22,7 @@
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-zenburn)))
+     (color-theme-gruber-darker)))
 
 ;; == Snippets ==
 (require 'yasnippet)
@@ -88,6 +88,10 @@
 ;; For Emacs on Mac OS X http://emacsformacosx.com/
 ;; Opens files in the existing frame instead of making new ones.
 (setq ns-pop-up-frames nil)
+
+;; == Android Mode ==
+(add-to-list 'load-path "~/.emacs.d/tony/android-mode")
+(require 'android-mode)
 
 ;; == Start the server == 
 (server-start)

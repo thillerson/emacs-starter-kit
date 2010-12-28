@@ -1,3 +1,6 @@
 [submodule "vendor/wrap-region"]
 	path = vendor/wrap-region
 	url = https://github.com/rejeep/wrap-region.git
+[submodule "vendor/undo-tree"]
+	path = vendor/undo-tree
+	url = http://www.dr-qubit.org/git/undo-tree.git

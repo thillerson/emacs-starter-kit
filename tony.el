@@ -30,6 +30,11 @@
 (wrap-region-mode t)
 (wrap-region-global-mode t)
 
+;; == Undo Tree ==
+(add-to-list 'load-path "~/.emacs.d/vendor/undo-tree")
+(require 'undo-tree)
+(global-undo-tree-mode)
+
 ;; == Snippets ==
 (require 'yasnippet)
 (yas/initialize)

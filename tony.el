@@ -24,6 +24,12 @@
      (color-theme-initialize)
      (color-theme-gruber-darker)))
 
+;; == Wrap Region ==
+(add-to-list 'load-path "~/.emacs.d/vendor/wrap-region")
+(require 'wrap-region)
+(wrap-region-mode t)
+(wrap-region-global-mode t)
+
 ;; == Snippets ==
 (require 'yasnippet)
 (yas/initialize)

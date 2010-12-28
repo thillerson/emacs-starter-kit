@@ -1,0 +1,3 @@
+[submodule "vendor/wrap-region"]
+	path = vendor/wrap-region
+	url = https://github.com/rejeep/wrap-region.git

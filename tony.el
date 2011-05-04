@@ -43,6 +43,7 @@
 ;; Cucumber
 (autoload 'feature-mode "feature-mode" "Mode for editing cucumber files" t)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+(add-hook 'feature-mode-hook 'viper-mode)
 
 ;; == Haskell ==
 (load "~/.emacs.d/elpa-to-submit/haskell-mode/haskell-site-file")
@@ -78,6 +79,7 @@
 ;;(require 'viper)
 ;; Viper mode will be enabled by Vimpulse:
 (require 'vimpulse)
+(setq viper-want-emacs-keys-in-insert t)
 
 ;; == rhtml-mode for rinari == 
 (add-to-list 'load-path "~/.emacs.d/tony/rhtml")

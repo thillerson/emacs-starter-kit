@@ -40,6 +40,29 @@
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/tony/snippets")
 
+;; Coffee script mode by defunkt
+(add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
+(require 'coffee-mode)
+
+(defun coffee-custom ()
+  "coffee-mode-hook"
+
+  ;; CoffeeScript uses two spaces.
+  (set (make-local-variable 'tab-width) 2)
+
+  ;; Emacs key binding
+  (define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer)
+
+  ;; Compile '.coffee' files on every save
+  ;; (add-hook 'after-save-hook
+  ;;     '(lambda ()
+  ;;        (when (string-match "\.coffee$" (buffer-name))
+  ;;         (coffee-compile-file))))
+  )
+
+(add-hook 'coffee-mode-hook '(lambda () (coffee-custom)))
+
+
 ;; Cucumber
 (autoload 'feature-mode "feature-mode" "Mode for editing cucumber files" t)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
@@ -61,11 +84,6 @@
             '(lambda ()
                (yas/minor-mode-on)
                ))
-
-;; == Keybindings == 
-(global-set-key (kbd "M-s") 'save-buffer)
-(global-set-key (kbd "M-z") 'undo)
-(global-set-key (kbd "M-l") 'goto-line)
 
 ;; ==  Hooks == 
 ;;(add-hook 'ruby-mode-hook 'whitespace-mode)
@@ -105,6 +123,11 @@
 ;; == Android Mode ==
 (add-to-list 'load-path "~/.emacs.d/tony/android-mode")
 (require 'android-mode)
+
+;; == Keybindings == 
+(global-set-key (kbd "M-s") 'save-buffer)
+(global-set-key (kbd "M-z") 'undo)
+(global-set-key (kbd "M-l") 'goto-line)
 
 ;; == Start the server == 
 (server-start)

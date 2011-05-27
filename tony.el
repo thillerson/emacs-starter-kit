@@ -22,7 +22,7 @@
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-gruber-darker)))
+     (color-theme-subdued)))
 
 ;; == Wrap Region ==
 (add-to-list 'load-path "~/.emacs.d/vendor/wrap-region")
@@ -124,10 +124,18 @@
 (add-to-list 'load-path "~/.emacs.d/tony/android-mode")
 (require 'android-mode)
 
+;; == Macros ==
+(load "~/.emacs.d/tony/macros/snippets.el" nil t)
+
 ;; == Keybindings == 
 (global-set-key (kbd "M-s") 'save-buffer)
 (global-set-key (kbd "M-z") 'undo)
 (global-set-key (kbd "M-l") 'goto-line)
+
+;; == Macro Keybindings == 
+(global-set-key (kbd "M--") 'single-arrow)
+(global-set-key (kbd "M-=") 'hash-rocket)
+
 
 ;; == Start the server == 
 (server-start)

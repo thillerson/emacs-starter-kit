@@ -22,7 +22,7 @@
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-subdued)))
+     (color-theme-blackboard)))
 
 ;; == Wrap Region ==
 (add-to-list 'load-path "~/.emacs.d/vendor/wrap-region")

@@ -24,6 +24,10 @@
      (color-theme-initialize)
      (color-theme-blackboard)))
 
+;; Line numbers
+(require 'linum)
+(global-linum-mode 1)
+
 ;; == Wrap Region ==
 (add-to-list 'load-path "~/.emacs.d/vendor/wrap-region")
 (require 'wrap-region)

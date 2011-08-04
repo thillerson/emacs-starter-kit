@@ -9,14 +9,14 @@
 (add-to-list 'default-frame-alist '(width . 200))
 
 ;; == Alpha ==
-(add-to-list 'default-frame-alist '(alpha 93 75))
+(add-to-list 'default-frame-alist '(alpha 95 75))
+
+;; == Fonts ==
+(set-face-attribute 'default nil :font "Inconsolata-15")
 
 ;; == Colors ==  
 (add-to-list 'load-path "~/.emacs.d/tony/color-theme")
 (require 'color-theme)
-
-;; A few more color themes
-(add-to-list 'load-path "~/.emacs.d/tony/color-themes")
 
 ;; Set the color theme
 (eval-after-load "color-theme"

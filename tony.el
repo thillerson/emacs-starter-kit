@@ -12,7 +12,7 @@
 (add-to-list 'default-frame-alist '(alpha 95 75))
 
 ;; == Fonts ==
-(set-face-attribute 'default nil :font "Menlo-12")
+(set-face-attribute 'default nil :font "Inconsolata-14")
 
 ;; == Colors ==  
 (add-to-list 'load-path "~/.emacs.d/tony/color-theme")

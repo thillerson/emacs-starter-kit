@@ -141,6 +141,8 @@
 (global-set-key (kbd "M-=") 'hash-rocket)
 (global-set-key (kbd "M-<") 'erb-tag)
 
+;; == File Associations ==
+(setq auto-mode-alist (cons '("\\.ejs$" . html-mode) auto-mode-alist))
 
 ;; == Start the server == 
 (server-start)

@@ -139,6 +139,7 @@
 ;; == Macro Keybindings == 
 (global-set-key (kbd "M--") 'single-arrow)
 (global-set-key (kbd "M-=") 'hash-rocket)
+(global-set-key (kbd "M-<") 'erb-tag)
 
 
 ;; == Start the server == 

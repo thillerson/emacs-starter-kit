@@ -16,13 +16,15 @@
 
 ;; == Colors ==  
 (add-to-list 'load-path "~/.emacs.d/tony/color-theme")
+(add-to-list 'load-path "~/.emacs.d/tony/color-theme/themes/emacs-color-theme-solarized")
 (require 'color-theme)
+(require 'color-theme-solarized)
 
 ;; Set the color theme
 (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-blackboard)))
+     (color-theme-solarized-dark)))
 
 ;; Line numbers
 (require 'linum)

@@ -143,6 +143,8 @@
 (global-set-key (kbd "M-=") 'hash-rocket)
 (global-set-key (kbd "M-<") 'erb-tag)
 
+(setq-default tab-width 2)
+
 ;; == File Associations ==
 (setq auto-mode-alist (cons '("\\.ejs$" . html-mode) auto-mode-alist))
 

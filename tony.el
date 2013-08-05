@@ -30,6 +30,12 @@
 (require 'linum)
 (global-linum-mode 1)
 
+;; MELPA
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(when (< emacs-major-version 24)
+  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
 ;; == Wrap Region ==
 (add-to-list 'load-path "~/.emacs.d/vendor/wrap-region")
 (require 'wrap-region)

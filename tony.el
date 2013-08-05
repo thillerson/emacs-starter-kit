@@ -148,6 +148,7 @@
 (global-set-key (kbd "M--") 'single-arrow)
 (global-set-key (kbd "M-=") 'hash-rocket)
 (global-set-key (kbd "M-<") 'erb-tag)
+(global-set-key (kbd "C-x C-)") 'rotate-windows)
 
 (setq-default tab-width 2)
 

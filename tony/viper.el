@@ -1,10 +1,9 @@
-;;; viper.el --- A full-featured Vi emulator for GNU Emacs and XEmacs,
+;;; viper.el --- A full-featured Vi emulator for Emacs and XEmacs,
 ;;		 a VI Plan for Emacs Rescue,
 ;;		 and a venomous VI PERil.
 ;;		 Viper Is also a Package for Emacs Rebels.
 
-;; Copyright (C) 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
-;;   2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010 Free Software Foundation, Inc.
+;; Copyright (C) 1994-2013 Free Software Foundation, Inc.
 
 ;; Author: Michael Kifer <kifer@cs.stonybrook.edu>
 ;; Keywords: emulations
@@ -15,7 +14,7 @@
 ;; filed in the Emacs bug reporting system against this file, a copy
 ;; of the bug report be sent to the maintainer's email address.
 
-(defconst viper-version "3.14.1 of August 15, 2009"
+(defconst viper-version "3.14.2 of July 4, 2013"
   "The current version of Viper")
 
 ;; This file is part of GNU Emacs.
@@ -88,7 +87,7 @@
 ;;    facility in the original Vi.
 ;;    First, one can execute any Emacs command while defining a
 ;;    macro, not just the Vi commands.  Second, macros are defined in a
-;;    WYSYWYG mode, using an interface to Emacs' WYSIWYG style of defining
+;;    WYSYWYG mode, using an interface to Emacs's WYSIWYG style of defining
 ;;    macros.  Third, in Viper, one can define macros that are specific to
 ;;    a given buffer, a given major mode, or macros defined for all buffers.
 ;;    The same macro name can have several different definitions:
@@ -104,8 +103,8 @@
 ;;  (require 'viper)
 ;;
 
-;;; Acknowledgements:
-;;  -----------------
+;;; Acknowledgments:
+;;  ----------------
 ;;  Bug reports and ideas contributed by many users have helped
 ;;  improve Viper and the various versions of VIP.
 ;;  See the on-line manual for a complete list of contributors.
@@ -314,7 +313,7 @@
 (require 'viper-keym)
 
 ;; better be defined before Viper custom group.
-(defvar viper-custom-file-name (convert-standard-filename "~/.viper")
+(defvar viper-custom-file-name (locate-user-emacs-file "viper" ".viper")
   "Viper customization file.
 If set by the user, this must be done _before_ Viper is loaded in `~/.emacs'.")
 
@@ -352,7 +351,7 @@ user decide when to invoke Viper in a major mode."
 If t, viperize Emacs.  If nil -- don't.  If `ask', ask the user.
 This variable is used primarily when Viper is being loaded.
 
-Must be set in `~/.emacs' before Viper is loaded.
+Must be set in your init file before Viper is loaded.
 DO NOT set this variable interactively, unless you are using the customization
 widget."
   :type '(choice (const nil) (const t) (const ask))
@@ -412,6 +411,7 @@ widget."
     dired-mode
     efs-mode
     tar-mode
+    egg-status-buffer-mode
 
     browse-kill-ring-mode
     recentf-mode
@@ -436,7 +436,7 @@ widget."
     view-mode
     vm-mode
     vm-summary-mode)
-  "*A list of major modes that should come up in Emacs state.
+  "A list of major modes that should come up in Emacs state.
 Normally, Viper would bring buffers up in Emacs state, unless the corresponding
 major mode has been placed on `viper-vi-state-mode-list' or
 `viper-insert-state-mode-list'.  So, don't place a new mode on this list,
@@ -452,7 +452,7 @@ unless it is coming up in a wrong Viper state."
     erc-mode
     eshell-mode
     shell-mode)
-  "*A list of major modes that should come up in Vi Insert state."
+  "A list of major modes that should come up in Vi Insert state."
   :type '(repeat symbol)
   :group 'viper-misc)
 
@@ -492,7 +492,7 @@ unless it is coming up in a wrong Viper state."
     )
   "List specifying how to modify the various major modes to enable some Viperisms.
 The list has the structure: ((mode viper-state keymap) (mode viper-state
-keymap) ...).  If `mode' is on the list, the `kemap' will be made active (on
+keymap) ...).  If `mode' is on the list, the `keymap' will be made active (on
 the minor-mode-map-alist) in the specified viper state.
 If you change this list, have to restart Emacs for the change to take effect.
 However, if you did the change through the customization widget, then Emacs
@@ -548,7 +548,7 @@ If Viper is enabled, turn it off.  Otherwise, turn it on."
 		      "Viper Is a Package for Emacs Rebels,
 a VI Plan for Emacs Rescue, and a venomous VI PERil.
 
-Incidentally, Viper emulates Vi under GNU Emacs 20 and XEmacs 20.
+Incidentally, Viper emulates Vi under Emacs/XEmacs 20.
 It supports all of what is good in Vi and Ex, while extending
 and improving upon much of it.
 
@@ -562,7 +562,7 @@ and improving upon much of it.
       use Emacs productively, you are advised to reach user level 3 or higher.
 
       At user level 2 or higher, ^X and ^C have Emacs, not Vi, bindings;
-      ^Z toggles Vi/Emacs states; ^G is Emacs' keyboard-quit (like ^C in Vi).
+      ^Z toggles Vi/Emacs states; ^G is Emacs's keyboard-quit (like ^C in Vi).
 
    2. Vi exit functions (e.g., :wq, ZZ) work on INDIVIDUAL files -- they
       do not cause Emacs to quit, except at user level 1 (for a novice).
@@ -661,7 +661,7 @@ user customization, unrelated to Viper.  For instance, if the user advised
 undone.
 It also can't undo some Viper settings."
   (interactive)
-
+  (viper-setup-ESC-to-escape nil)
   ;; restore non-viper vars
   (setq-default
    next-line-add-newlines
@@ -778,7 +778,7 @@ It also can't undo some Viper settings."
   (viper-unbind-mouse-search-key)
   (viper-unbind-mouse-insert-key)
   ;; In emacs, we have to advice handle-switch-frame
-  ;; This advice is undone earlier, when all advices matchine "viper-" are
+  ;; This advice is undone earlier, when all advices matching "viper-" are
   ;; deactivated.
   (if (featurep 'xemacs)
       (remove-hook 'mouse-leave-frame-hook 'viper-remember-current-frame))
@@ -826,6 +826,58 @@ It also can't undo some Viper settings."
   (add-hook 'viper-post-command-hooks 'set-viper-state-in-major-mode t))
 
 
+;;; Handling of tty's ESC event
+
+;; On a tty, an ESC event can either be the user hitting the escape key, or
+;; some element of a byte sequence used to encode for example cursor keys.
+;; So we try to recognize those events that correspond to the escape key and
+;; turn them into `escape' events (same as used under GUIs).  The heuristic we
+;; use to distinguish the two cases is based, as usual, on a timeout, and on
+;; the fact that the special ESC=>escape mapping only takes place if the whole
+;; last key-sequence so far is just [?\e], i.e. either we're still in
+;; read-key-sequence, or the last read-key-sequence only read [?\e], which
+;; should ideally never happen because it should have been mapped to [escape].
+
+(defun viper--tty-ESC-filter (map)
+  (if (and (equal (this-single-command-keys) [?\e])
+           (sit-for (/ viper-fast-keyseq-timeout 1000)))
+      [escape] map))
+
+(defun viper--lookup-key (map key)
+  "Kind of like `lookup-key'.
+Two differences:
+- KEY is a single key, not a sequence.
+- the result is the \"raw\" binding, so it can be a `menu-item', rather than the
+  binding contained in that menu item."
+  (catch 'found
+    (map-keymap (lambda (k b) (if (equal key k) (throw 'found b))) map)))
+
+(defun viper-catch-tty-ESC ()
+  "Setup key mappings of current terminal to turn a tty's ESC into `escape'."
+  (when (memq (terminal-live-p (frame-terminal)) '(t pc))
+    (let ((esc-binding (viper-uncatch-tty-ESC)))
+      (define-key input-decode-map
+        [?\e] `(menu-item "" ,esc-binding :filter viper--tty-ESC-filter)))))
+
+(defun viper-uncatch-tty-ESC ()
+  "Don't hack ESC into `escape' any more."
+  (let ((b (viper--lookup-key input-decode-map ?\e)))
+    (and (eq 'menu-item (car-safe b))
+         (eq 'viper--tty-ESC-filter (nth 4 b))
+         (define-key input-decode-map [?\e] (setq b (nth 2 b))))
+    b))
+
+(defun viper-setup-ESC-to-escape (enable)
+  (if enable
+      (add-hook 'tty-setup-hook 'viper-catch-tty-ESC)
+    (remove-hook 'tty-setup-hook 'viper-catch-tty-ESC))
+  (let ((seen ()))
+    (dolist (frame (frame-list))
+      (let ((terminal (frame-terminal frame)))
+        (unless (memq terminal seen)
+          (push terminal seen)
+          (with-selected-frame frame
+            (if enable (viper-catch-tty-ESC) (viper-uncatch-tty-ESC))))))))
 
 ;; This sets major mode hooks to make them come up in vi-state.
 (defun viper-set-hooks ()
@@ -838,6 +890,8 @@ It also can't undo some Viper settings."
   (if (eq (default-value 'major-mode) 'fundamental-mode)
       (setq-default major-mode 'viper-mode))
 
+  (viper-setup-ESC-to-escape t)
+
   (add-hook 'change-major-mode-hook 'viper-major-mode-change-sentinel)
   (add-hook 'find-file-hooks 'set-viper-state-in-major-mode)
 
@@ -848,23 +902,17 @@ It also can't undo some Viper settings."
   (defvar emerge-startup-hook)
   (add-hook 'emerge-startup-hook 'viper-change-state-to-emacs)
 
-  ;; Zap bad bindings in flyspell-mouse-map, which prevent ESC from working
-  ;; over misspelled words (due to the overlay keymaps)
-  (defvar flyspell-mode-hook)
-  (add-hook 'flyspell-mode-hook
-	    '(lambda ()
-	       (define-key flyspell-mouse-map viper-ESC-key nil)))
   ;; if viper is started from .emacs, it might be impossible to get certain
   ;; info about the display and windows until emacs initialization is complete
   ;; So do it via the window-setup-hook
   (add-hook 'window-setup-hook
-  	    '(lambda ()
-	       (modify-frame-parameters
-		(selected-frame)
-		(list (cons 'viper-vi-state-cursor-color
-			    (viper-get-cursor-color))))
-	       (setq viper-vi-state-cursor-color (viper-get-cursor-color))
-	       ))
+  	    (lambda ()
+              (modify-frame-parameters
+               (selected-frame)
+               (list (cons 'viper-vi-state-cursor-color
+                           (viper-get-cursor-color))))
+              (setq viper-vi-state-cursor-color (viper-get-cursor-color))
+              ))
 
   ;; Tell vc-diff to put *vc* in Vi mode
   (eval-after-load
@@ -971,9 +1019,9 @@ It also can't undo some Viper settings."
   (if (featurep 'emacs)
       (eval-after-load "mule-cmds"
 	'(progn
-	   (defadvice inactivate-input-method (after viper-mule-advice activate)
+	   (defadvice deactivate-input-method (after viper-mule-advice activate)
 	     "Set viper-special-input-method to disable intl. input methods."
-	     (viper-inactivate-input-method-action))
+	     (viper-deactivate-input-method-action))
 	   (defadvice activate-input-method (after viper-mule-advice activate)
 	     "Set viper-special-input-method to enable intl. input methods."
 	     (viper-activate-input-method-action))
@@ -985,14 +1033,14 @@ It also can't undo some Viper settings."
       '(progn
 	 (add-hook 'input-method-activate-hook
 		   'viper-activate-input-method-action t)
-	 (add-hook 'input-method-inactivate-hook
-		   'viper-inactivate-input-method-action t)))
+	 (add-hook 'input-method-deactivate-hook
+		   'viper-deactivate-input-method-action t)))
     )
   (eval-after-load "mule-cmds"
     '(defadvice toggle-input-method (around viper-mule-advice activate)
        "Adjust input-method toggling in vi-state."
        (if (and viper-special-input-method (eq viper-current-state 'vi-state))
-	   (viper-inactivate-input-method)
+	   (viper-deactivate-input-method)
 	 ad-do-it)))
 
   ) ; viper-set-hooks
@@ -1050,7 +1098,7 @@ It also can't undo some Viper settings."
 					 (memq 'down (event-modifiers (aref key 1)))))
 				(read-event))))))
     ) ; (if (featurep 'xemacs)
-  
+
   (if (featurep 'xemacs)
       ;; XEmacs
       (defadvice describe-key-briefly
@@ -1076,7 +1124,7 @@ It also can't undo some Viper settings."
 			       (prefix-numeric-value current-prefix-arg))
 			   1))))
     ) ; (if (featurep 'xemacs)
-  
+
   (defadvice find-file (before viper-add-suffix-advice activate)
     "Use `read-file-name' for reading arguments."
     (interactive (cons (read-file-name "Find file: " nil default-directory)
@@ -1173,7 +1221,7 @@ If you wish to Viperize AND make this your way of life, please put
 	(setq viper-mode t)
 	(require 'viper)
 
-in your .emacs file (preferably, close to the top).
+in your init file (preferably, close to the top).
 These two lines must come in the order given.
 
 ** Viper users:
@@ -1375,5 +1423,4 @@ These two lines must come in the order given.
 ;; eval: (put 'viper-deflocalvar 'lisp-indent-hook 'defun)
 ;; End:
 
-;; arch-tag: 5f3e844c-c4e6-4bbd-9b73-63bdc14e7d79
 ;;; viper.el ends here

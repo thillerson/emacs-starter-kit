@@ -158,7 +158,10 @@
 ;; == Start the server == 
 (server-start)
 
+;; Annoyances
+(setq-default truncate-lines 0)
+(setq-default longlines-mode 0)
+(setq-default visual-line-mode t)
 ;; Never ever ever ever us this stupid terrible mode
 (eval-after-load 'paredit
   '(disable-paredit-mode))
-  

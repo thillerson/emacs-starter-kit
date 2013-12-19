@@ -34,3 +34,8 @@
 (depends-on "wrap-region")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
+(depends-on "tree-mode") ;; needed for dirtree
+
+;; Missing Dependencies - not found (kept locally)
+(depends-on "windata") ;; needed for dirtree
+(depends-on "dirtree")

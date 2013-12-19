@@ -36,3 +36,6 @@
 (autoload 'feature-mode "feature-mode" "Mode for editing cucumber files" t)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 (add-hook 'feature-mode-hook 'viper-mode)
+
+;; Dirtree
+(require 'dirtree)

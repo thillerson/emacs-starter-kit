@@ -11,6 +11,9 @@
 (global-set-key (kbd "M-`") 'file-cache-minibuffer-complete)
 ;(global-set-key (kbd "C-x C-b") 'ibuffer)
 
+;; dirtree
+(global-set-key (kbd "C-x C-d") 'dirtree)
+
 ;; == Macro Keybindings == 
 (global-set-key (kbd "M--") 'single-arrow)
 (global-set-key (kbd "M-=") 'hash-rocket)

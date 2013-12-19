@@ -140,7 +140,7 @@ With prefix arguement select `dirtree-buffer'"
 
 (define-derived-mode dirtree-mode tree-mode "Dir-Tree"
   "A mode to display tree of directory"
-  (tree-widget-set-theme "folder"))
+  (tree-widget-set-theme "text"))
 
 (defun dirtree-root-widget (directory)
   "create the root directory"

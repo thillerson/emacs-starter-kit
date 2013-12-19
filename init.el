@@ -9,4 +9,3 @@
 (load "04-defuns.el")
 
 (load "100-autocomplete.el")
-(load "101-project-explorer.el")

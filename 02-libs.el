@@ -38,4 +38,4 @@
 (add-hook 'feature-mode-hook 'viper-mode)
 
 ;; Dirtree
-(require 'dirtree)
+(autoload 'dirtree "dirtree" "Add directory to tree view")

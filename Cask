@@ -30,11 +30,12 @@
 (depends-on "rvm")
 (depends-on "s")
 (depends-on "textmate")
+(depends-on "tree-mode") ;; needed for dirtree
 (depends-on "web-mode")
 (depends-on "wrap-region")
 (depends-on "yaml-mode")
 (depends-on "yasnippet")
-(depends-on "tree-mode") ;; needed for dirtree
+(depends-on "undo-tree")
 
 ;; Missing Dependencies - not found (kept locally)
 (depends-on "windata") ;; needed for dirtree
